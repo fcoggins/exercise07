@@ -14,9 +14,7 @@ def cleanup_str(item, letter):
 def count_word_instances():
     filename = open("twain.txt")
     document = filename.read()
-    document_stripped = document.strip()
     word_list = document.split()
-
     punct_chars = string.punctuation
 
     #searching chars in each string in list
@@ -26,15 +24,15 @@ def count_word_instances():
             if letter in punct_chars:
                 word_list[i] = cleanup_str(word_list[i], letter)
 
-    dictionary = {}
+    word_count = {}
 
     for word in word_list:
-        if word in dictionary:
-            dictionary[word] += 1
-        else:
-            dictionary[word] = 1
 
-    for key, value in dictionary.iteritems():
+        word_count.setdefault(word, 0)
+        word_count[word] += 1
+        
+
+    for key, value in word_count.iteritems():
         print key, value
 
 if __name__ == "__main__":

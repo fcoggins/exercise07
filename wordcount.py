@@ -6,12 +6,19 @@ Your program should then print those counts to the screen. For example:
 """
 
 import string
-from operator import itemgetter
 
 def cleanup_str(item, letter):
     new_str = string.replace(item, letter, "")
-    #new_str = new_str.lower()
     return new_str
+
+def output_word_freq(word_count):
+    list_o_tuples = word_count.items()
+    list_o_tuples.sort(key=lambda x: x[1])
+    list_o_tuples.reverse()
+
+    for word in range(len(list_o_tuples)):
+        print "Word:%s, Frequency:%r" % (list_o_tuples[word][0], list_o_tuples[word][1])
+
 
 def count_word_instances():
     filename = open("twain.txt")
@@ -33,19 +40,8 @@ def count_word_instances():
         word_count.setdefault(word, 0)
         word_count[word] += 1
 
-    list_o_tuples = word_count.items()
-    #print list_o_tuples
-    list_o_tuples.sort(key=lambda x: x[1])
-    list_o_tuples.reverse()
-    print list_o_tuples
+    output_word_freq(word_count)
 
-
-    # for value in word_count.sort(key=lambda x: x[1]):
-        
-    # print word_count.items()
-
-    # # for key, value in word_count.iteritems():
-    #     print key, value
 
 if __name__ == "__main__":
     count_word_instances()
